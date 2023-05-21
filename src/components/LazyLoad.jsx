@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-
+import PokemonCard from './PokemonCard';
 const LazyLoad = () => {
   const [pokemonData, setPokemonData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -10,7 +10,7 @@ const LazyLoad = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const fetchData = async () => {
+    (async () => {
       try {
         const response = await fetch(currentPageUrl);
         const data = await response.json();
@@ -20,9 +20,8 @@ const LazyLoad = () => {
       } catch (error) {
         console.log(error);
       }
-    };
+    })();
 
-    fetchData();
   }, [currentPageUrl]);
 
   useEffect(() => {
@@ -66,7 +65,7 @@ const LazyLoad = () => {
       <input type="text" placeholder="Search Pokémon" value={searchTerm} onChange={handleSearch} />
       <ul>
         {filteredPokemon.map((pokemon, index) => (
-          <li key={index}>{pokemon.name}</li>
+            <li key={index}><PokemonCard name={pokemon.name} url={pokemon.url} /></li>
         ))}
       </ul>
       

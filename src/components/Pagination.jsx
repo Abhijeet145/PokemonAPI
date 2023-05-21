@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-
+import PokemonCard from './PokemonCard';
 const Pagination = () => {
   const [pokemonData, setPokemonData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -49,7 +49,7 @@ const Pagination = () => {
       ) : (
         <ul>
           {filteredPokemon.map((pokemon, index) => (
-            <li key={index}>{pokemon.name}</li>
+            <li key={index}><PokemonCard name={pokemon.name} url={pokemon.url} /></li>
           ))}
         </ul>
       )}
